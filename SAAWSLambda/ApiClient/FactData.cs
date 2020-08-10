@@ -92,12 +92,12 @@ namespace SAAWSLambda.ApiClient
             return countries;
         }
 
-        public async Task<DeezerSearchResp> GetCountryAnthemSearch(string countryName, ILambdaContext context)
+        public async Task<DeezerSearchResp> SearchDeezer(string query, ILambdaContext context)
         {
             DeezerSearchResp deezer = new DeezerSearchResp();
             
             try
-            {   var url = $"https://deezerdevs-deezer.p.rapidapi.com/search?q={countryName}";
+            {   var url = $"https://deezerdevs-deezer.p.rapidapi.com/search?q={query}";
                 context.Logger.LogLine($"Attempting to fetch data from {url}");
                 var client = new RestClient(url);
                 var request = new RestRequest(Method.GET);
@@ -114,6 +114,77 @@ namespace SAAWSLambda.ApiClient
             }
             return null;
         }
+
+        //private RenderDocumentDirective BuildDirective(string sentences, string bg = "")
+        //{
+        //    if (string.IsNullOrEmpty(bg))
+        //    {
+        //        bg = "https://i.ibb.co/5cWztFH/brown-on-seashore-near-mountain-1007657.jpg";
+
+        //    }
+        //    var mainLayout = new Layout(
+        //        new AlexaTextList
+        //        {
+        //            BackgroundImageSource = APLValue.To<string>("${textListData.properties.backgroundImageSource}"),
+        //            HeaderTitle = APLValue.To<string>("${textListData.properties.headerTitle}"),
+        //            HeaderSubtitle = APLValue.To<string>("${textListData.properties.headerSubtitle}"),
+        //            HeaderDivider = true,
+        //            BackgroundScale = new APLValue<Scale>(Scale.BestFill),
+        //            BackgroundAlign = new APLValue<string>("center"),
+        //            BackgroundColor = new APLValue<string>("transparent"),
+        //            ListItems = APLValue.To<List<AlexaTextListItem>>("${textListData.properties.listItemsToShow}")
+        //        }
+        //    );
+        //    mainLayout.Parameters = new List<Parameter>();
+        //    mainLayout.Parameters.Add(new Parameter("textListData"));
+
+        //    var renderDocument = new RenderDocumentDirective
+        //    {
+        //        Token = "randomToken",
+        //        Document = new APLDocument
+        //        {
+        //            MainTemplate = mainLayout
+        //        },
+
+        //        DataSources = new Dictionary<string, APLDataSource>
+        //        {
+        //            {
+        //                "textListData",new ObjectDataSource
+        //                {
+        //                    Properties = new Dictionary<string, object>
+        //                    {
+        //                        { "headerTitle", "Alexa text list header title" },
+        //                        { "headerSubtitle", "Header subtitle" },
+        //                        { "backgroundImageSource", bg },
+
+        //                        {
+        //                            "listItemsToShow", new APLValue<List<AlexaTextListItem>>()
+        //                            {
+        //                                Value = new List<AlexaTextListItem>
+        //                                {
+        //                                    new AlexaTextListItem
+        //                                    {
+        //                                        PrimaryText = "Hello world! 1"
+        //                                    },
+        //                                    new AlexaTextListItem
+        //                                    {
+        //                                        PrimaryText = "Hello world! 2"
+        //                                    },
+        //                                    new AlexaTextListItem
+        //                                    {
+        //                                        PrimaryText = "Hello world! 3"
+        //                                    }
+        //                                }
+        //                            }
+        //                        }
+        //                    }
+        //                }
+
+        //            }
+        //        }
+        //    };
+        //    return renderDocument;
+        //}
 
     }
 }
