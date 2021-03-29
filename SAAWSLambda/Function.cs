@@ -445,6 +445,15 @@ namespace SAAWSLambda
                                 resp.Response.Directives.Add(dre);
                                 return resp;
                             }
+                        case "QuietTimeIntent":
+                            {
+                                string msg = "Okay thanks";
+                                Reprompt er = new Reprompt(msg);
+                                var response = ResponseBuilder.Ask(msg, er, session);
+                                var dr = new Template().BuildAPLDirective(msg, null, "Sylvester Assistant", "Welcome");
+                                response.Response.Directives.Add(dr);
+                                return response;
+                            }
                         case "AMAZON.FallbackIntent":
                             {
                                 string msg = "Sylvester Assistant does not support that. You can ask me about any country. example, Tell me about Nigeria";
